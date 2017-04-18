@@ -106,8 +106,9 @@ public class Game
     {
         System.out.println();
         System.out.println("Welcome to Dungeon Dash!");
-        System.out.println("Dungeon Dash is a new, incredibly fun adventure game.");
-        System.out.println("Test your midieval knowledge and see if you can find the key to unlock King Joffrey's chest of unnkown treasure);
+        System.out.println("Dungeon Dash is a new, incredibly fun adventure game....");
+        System.out.println("Test your midieval knowledge and see if you can find the key to unlock");
+        System.out.println("King Joffrey's chest of unknown treasure...");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
