@@ -1,0 +1,7 @@
+public class Key {
+
+	public void use(Chest onChest)
+	{
+		onChest.unLock(this);
+	}
+}
