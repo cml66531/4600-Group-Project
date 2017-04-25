@@ -18,7 +18,10 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private Key key;  
+    private Chest chest;
+    private SecretRoom secretRoomKey;
+    private SecretRoom secretRoomChest;
     /**
      * Create the game and initialise its internal map.
      */
@@ -33,20 +36,24 @@ public class Game
      */
     private void createRooms()
     {
-        Room greatHall, diningRoom, guardRoom, hallway, kitchen, chapel, bedroom, closet, throneRoom, kingsRoom;;
-      
+        Room greatHall, diningRoom, guardRoom,  kitchen, chapel, hallway, closet, throneRoom;
+        SecretRoom bedroom;
+        SecretRoom kingsRoom;
+        
         // create the rooms
         greatHall = new Room("in the great hall of the castle");
         diningRoom = new Room("in the dinning room");
         guardRoom = new Room("in the guards room");
-        hallway = new Room("walking down the southern hallway");
+        hallway =new Room("walking down the southern hallway");
         kitchen = new Room("in the kitchen");
         chapel = new Room("in the chapel");
-        bedroom = new Room("in Lady Sansa's bedroom") ;
+        bedroom = new SecretRoom("in Lady Sansa's bedroom. You've found the key") ;
         closet = new Room("in his majesty's closet");
         throneRoom = new Room("standing among the iron throne in his majesty's throne room");
-        kingsRoom = new Room("in King Joffrey's room");
-        
+        kingsRoom = new SecretRoom("in King Joffrey's room");
+        secretRoomKey = bedroom;
+        secretRoomChest = kingsRoom;
+        //sets Secret room equal to any of the rooms
         
         // initialise room exits
         greatHall.setExit("east", diningRoom);
@@ -67,6 +74,7 @@ public class Game
         
         bedroom.setExit("north", closet);
         bedroom.setExit("south", chapel);
+        
         
         closet.setExit("south", bedroom);
         
@@ -174,10 +182,26 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
-
+        System.out.println(currentRoom);
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
+        
+        //if the next room is sansa's bedroom. we have found the key
+        if(nextRoom == secretRoomKey)
+        {
+            key.findKey();
+            System.out.println("You have found the key! Now find the Chest");
+       
+        }
+        
+        
+        if(nextRoom == secretRoomChest)
+        {
+            chest.unLock();
+            System.out.println("You have found the chest! The chest is unlocked and full of King Joffrey's hidden treasure! Congrats, you're rich!"); 
+        }
+        
         else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
