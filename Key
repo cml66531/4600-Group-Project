@@ -1,7 +1,32 @@
-public class Key {
+/**
+ * 
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Key
 
-	public void use(Chest onChest)
-	{
-		onChest.unLock(this);
-	}
+{
+    private boolean foundKey = false;
+    private Chest onChest;
+    
+    public Key()
+    {
+      this.foundKey = false;
+    }
+
+    public void use(Chest onChest)
+    {
+        onChest.unLock(this);
+    }
+
+    public boolean getKey()
+    {
+        return foundKey;
+    }
+    
+    public void findKey()
+    {
+         this.foundKey = true;
+    }
 }
