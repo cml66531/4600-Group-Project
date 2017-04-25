@@ -196,7 +196,7 @@ public class Game
         }
         
         
-        if(nextRoom == secretRoomChest)
+        if(nextRoom == secretRoomChest && key.findKey())
         {
             chest.unLock();
             System.out.println("You have found the chest! The chest is unlocked and full of King Joffrey's hidden treasure! Congrats, you're rich!"); 
