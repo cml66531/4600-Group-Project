@@ -1,18 +1,31 @@
-public class Chest {
 
-	private boolean chestIsLocked;
-	private Key key;
-	
-	public void unLock(Key theKey) {
-		if(key == theKey)
-			chestIsLocked = false;
-	}
-	
-	/**
-	 * Should return true if the chest is locked, false otherwise
-	 */
-	public boolean isLocked() {
-		return chestIsLocked;
-	}
-	
-	/**
+/**
+ * Write a description of class Chest here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Chest
+{
+    // instance variables - replace the example below with your own
+    private boolean chestIsLocked = true;
+    private Key key;
+    //private Key key;
+
+    public void unLock(Key theKey) 
+    {
+        if(key == theKey)
+        {
+            chestIsLocked = false; 
+        }
+    }
+
+    /**
+     * Should return true if the chest is locked, false otherwise
+     */
+    public boolean isLocked()
+    {
+        return chestIsLocked;
+    }
+
+}
