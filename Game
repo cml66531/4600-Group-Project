@@ -2,12 +2,13 @@
  *  Name of Game: Dungeon Dash
  *  Team Name: I'm Sorry MIS Jackson
  *  Team Members: Chris Levy, Sarah Duvall, Thomas DeLay
- *  Game Description: You start out in the grand hall of a castle and must travel around its 10 unique rooms
+ *  Game Description: You start out in the grand hall of a castle and must travel around its unique rooms
  *  looking for a key that gives you access to the hidden chest which contains all of the kings gold.
- *  Newly Added Features: 10 rooms, a key, a chest, and a music component.
+ *  Newly Added Features: 10 rooms, a key, and a chest full of gold.
  *  Bugs: None
  *  
  *  This class is the main class of the Dungeon Dash application. 
+ *  
  */
 
 public class Game 
@@ -17,6 +18,7 @@ public class Game
     private Key key;  
     private Chest chest;
     private SecretRoom secretRoomKey;
+    boolean secretKey = false;
     private SecretRoom secretRoomChest;
     /**
      * Create the game and initialise its internal map.
@@ -33,24 +35,23 @@ public class Game
     private void createRooms()
     {
         Room greatHall, diningRoom, guardRoom,  kitchen, chapel, hallway, closet, throneRoom;
-        SecretRoom bedroom;
-        SecretRoom kingsRoom;
-        
+        SecretRoom bedroom, kingsRoom;
+
         // create the rooms
         greatHall = new Room("in the great hall of the castle");
         diningRoom = new Room("in the dinning room");
-        guardRoom = new Room("in the guards room");
+        guardRoom = new Room("in the guard's room");
         hallway =new Room("walking down the southern hallway");
         kitchen = new Room("in the kitchen");
         chapel = new Room("in the chapel");
-        bedroom = new SecretRoom("in Lady Sansa's bedroom. You've found the key") ;
-        closet = new Room("in his majesty's closet");
-        throneRoom = new Room("standing among the iron throne in his majesty's throne room");
-        kingsRoom = new SecretRoom("in King Joffrey's room");
+        closet = new Room("in his majesty's closet.");
+        throneRoom = new Room("standing among the iron throne in his majesty's throne room.");
+        bedroom = new SecretRoom("in Lady Sansa's bedroom. You've found the key.") ;
+        kingsRoom = new SecretRoom("in King Joffrey's bedroom. You see a chest in the corner.");
+
         secretRoomKey = bedroom;
         secretRoomChest = kingsRoom;
-        //sets Secret room equal to any of the rooms
-        
+
         // initialise room exits
         greatHall.setExit("east", diningRoom);
         greatHall.setExit("west", guardRoom);
@@ -67,21 +68,20 @@ public class Game
 
         chapel.setExit("west", kitchen);
         chapel.setExit("north", bedroom);
-        
+
         bedroom.setExit("north", closet);
         bedroom.setExit("south", chapel);
-        
-        
+
         closet.setExit("south", bedroom);
-        
         hallway.setExit("east", kitchen);
         hallway.setExit("north", throneRoom);
-        
+        hallway.setExit("south", greatHall);
+
         throneRoom.setExit("west", kingsRoom);
         throneRoom.setExit("south", hallway);
-        
+
         kingsRoom.setExit("east", throneRoom);
-        
+
         currentRoom = greatHall;  // start game in the great hall
     }
 
@@ -94,13 +94,13 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing Dungeon Dash.  Have a good day.");
     }
 
     /**
@@ -110,7 +110,8 @@ public class Game
     {
         System.out.println();
         System.out.println("Welcome to Dungeon Dash!");
-        System.out.println("Dungeon Dash is a new, incredibly fun adventure game....");
+        System.out.println("Dungeon Dash is a new and very addictive adventure game!");
+        System.out.println();
         System.out.println("Test your medieval knowledge and see if you can find the key to unlock");
         System.out.println("King Joffrey's chest of unknown treasure...");
         System.out.println("Type 'help' if you need help.");
@@ -178,34 +179,34 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
-        System.out.println(currentRoom);
+
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("There is no door in that direction...");
         }
-        
-        //if the next room is sansa's bedroom. we have found the key
-        if(nextRoom == secretRoomKey)
+        else 
         {
-            //key.findKey();
-            System.out.println("You have found the key! Now find the Chest");
-       
-        }
-        
-        if(nextRoom == secretRoomChest)
-        {
-            System.out.println("You have found King Joffrey's chest! If only you had the key. Keep looking.");
-        }
-        
-        if(nextRoom == secretRoomChest && key.getKey())
-        {
-            //chest.unLock();
-            System.out.println("You have found the chest! The chest is unlocked and full of King Joffrey's hidden treasure! Congrats, you're rich!"); 
-        }
-        
-        else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+        //if the next room is sansa's bedroom. we have found the key
+        if(nextRoom == secretRoomKey)
+        {
+            System.out.println("You have found the key! Now find the Chest!");
+            secretKey = true;
+        }
+
+        if(nextRoom == secretRoomChest && secretKey == false)
+        {
+            System.out.println("You have found King Joffrey's chest! If only you had the key. Keep looking.");
+        }
+
+        if(nextRoom == secretRoomChest && secretKey == true)
+        {
+            //chest.unLock();
+            System.out.println("You have found the chest! The chest is unlocked and full of King Joffrey's hidden treasure! Congrats, you're rich!");
+            return;
+        }
+
     }
 
     /** 
