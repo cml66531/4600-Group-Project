@@ -2,16 +2,12 @@
  *  Name of Game: Dungeon Dash
  *  Team Name: I'm Sorry MIS Jackson
  *  Team Members: Chris Levy, Sarah Duvall, Thomas DeLay
- *  Game Description: You start out in the grand hall of a castle and must travel around its unique rooms
+ *  Game Description: You start out in the grand hall of a castle and must travel around its 10 unique rooms
  *  looking for a key that gives you access to the hidden chest which contains all of the kings gold.
  *  Newly Added Features: 10 rooms, a key, a chest, and a music component.
  *  Bugs: None
  *  
  *  This class is the main class of the Dungeon Dash application. 
- *  
- *  This main class creates and initialises all the others: it creates all
- *  rooms, creates the parser and starts the game.  It also evaluates and
- *  executes the commands that the parser returns.
  */
 
 public class Game 
