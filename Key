@@ -1,6 +1,3 @@
-/**
- * The key class which is collected after entering a certain room and must be possessed to open the chest.
- */
 public class Key
 
 {
@@ -19,7 +16,8 @@ public class Key
 
     public boolean getKey()
     {
-        return foundKey;
+        return foundKey = true;
+        //take away = true
     }
     
     public void findKey()
