@@ -1,8 +1,5 @@
 /**
- * 
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * The key class which is collected after entering a certain room and must be possessed to open the chest.
  */
 public class Key
 
