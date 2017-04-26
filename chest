@@ -1,9 +1,6 @@
 
 /**
- * Write a description of class Chest here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is the chest class which holds an object that must be unlocked in one of the rooms.
  */
 public class Chest
 {
