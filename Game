@@ -20,6 +20,8 @@ public class Game
     private SecretRoom secretRoomKey;
     boolean secretKey = false;
     private SecretRoom secretRoomChest;
+    private SecretRoom secretRoomKnight;
+    boolean gameFinished = false;
     /**
      * Create the game and initialise its internal map.
      */
@@ -34,13 +36,13 @@ public class Game
      */
     private void createRooms()
     {
-        Room greatHall, diningRoom, guardRoom,  kitchen, chapel, hallway, closet, throneRoom;
-        SecretRoom bedroom, kingsRoom;
+        Room greatHall, diningRoom, kitchen, chapel, hallway, closet, throneRoom;
+        SecretRoom bedroom, kingsRoom, guardRoom;
 
         // create the rooms
         greatHall = new Room("in the great hall of the castle");
         diningRoom = new Room("in the dinning room");
-        guardRoom = new Room("in the guard's room");
+        guardRoom = new SecretRoom("in the guard's room");
         hallway =new Room("walking down the southern hallway");
         kitchen = new Room("in the kitchen");
         chapel = new Room("in the chapel");
@@ -48,7 +50,8 @@ public class Game
         throneRoom = new Room("standing among the iron throne in his majesty's throne room.");
         bedroom = new SecretRoom("in Lady Sansa's bedroom. You've found the key.") ;
         kingsRoom = new SecretRoom("in King Joffrey's bedroom. You see a chest in the corner.");
-
+        
+        secretRoomKnight = guardRoom;
         secretRoomKey = bedroom;
         secretRoomChest = kingsRoom;
 
@@ -94,11 +97,10 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-
-        boolean finished = false;
-        while (! finished) {
+        
+        while (!gameFinished) {
             Command command = parser.getCommand();
-            finished = processCommand(command);
+            gameFinished = processCommand(command);
         }
         System.out.println("Thank you for playing Dungeon Dash.  Have a good day.");
     }
@@ -188,7 +190,13 @@ public class Game
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
-        //if the next room is sansa's bedroom. we have found the key
+        
+        if(nextRoom == secretRoomKnight)
+        {
+            System.out.println("You are attacked by the castle's knight and die immediately.");
+            gameFinished = true;
+        }
+        
         if(nextRoom == secretRoomKey)
         {
             System.out.println("You have found the key! Now find the Chest!");
@@ -202,9 +210,8 @@ public class Game
 
         if(nextRoom == secretRoomChest && secretKey == true)
         {
-            //chest.unLock();
             System.out.println("You have found the chest! The chest is unlocked and full of King Joffrey's hidden treasure! Congrats, you're rich!");
-            return;
+            gameFinished = true;
         }
 
     }
