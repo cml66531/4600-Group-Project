@@ -1,4 +1,3 @@
-
 /**
  * This is the chest class which holds an object that must be unlocked in one of the rooms.
  */
@@ -7,7 +6,7 @@ public class Chest
     // instance variables - replace the example below with your own
     private boolean chestIsLocked = true;
     private Key key;
-    //private Key key;
+    
 
     public void unLock(Key theKey) 
     {
