@@ -190,15 +190,19 @@ public class Game
         //if the next room is sansa's bedroom. we have found the key
         if(nextRoom == secretRoomKey)
         {
-            key.findKey();
+            //key.findKey();
             System.out.println("You have found the key! Now find the Chest");
        
         }
         
-        
-        if(nextRoom == secretRoomChest && key.findKey())
+        if(nextRoom == secretRoomChest)
         {
-            chest.unLock();
+            System.out.println("You have found King Joffrey's chest! If only you had the key. Keep looking.");
+        }
+        
+        if(nextRoom == secretRoomChest && key.getKey())
+        {
+            //chest.unLock();
             System.out.println("You have found the chest! The chest is unlocked and full of King Joffrey's hidden treasure! Congrats, you're rich!"); 
         }
         
